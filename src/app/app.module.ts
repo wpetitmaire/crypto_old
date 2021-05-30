@@ -3,16 +3,24 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RecapitulatifComponent } from './recapitulatif/recapitulatif.component';
+import { APP_BASE_HREF } from '@angular/common';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RecapitulatifComponent
   ],
   imports: [
+    MDBBootstrapModule.forRoot(),
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/apps/crypto' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
