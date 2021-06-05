@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "raz-environnement": "npx ts-node ./scripts/razenv.ts",
     "set-environnement": "npx ts-node ./scripts/setenv.ts",
     "start": "npm run set-environnement && ng serve --open=true --sourceMap=true",
     "build": "npm run set-environnement && ng build",
@@ -39,6 +40,7 @@
     "@angular/compiler-cli": "~10.2.0",
     "@types/crypto-js": "^4.0.1",
     "@types/node": "^12.20.13",
+    "@types/yargs": "^17.0.0",
     "dotenv": "^10.0.0",
     "ts-node": "^8.10.2",
     "tslint": "~6.1.0",
