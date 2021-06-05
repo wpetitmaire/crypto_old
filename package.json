@@ -9,6 +9,11 @@
     "build": "npm run set-environnement && ng build",
     "build-prod": "npm run set-environnement && ng build --prod --baseHref=./"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run raz-environnement"
+    }
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.2.0",
@@ -42,6 +47,7 @@
     "@types/node": "^12.20.13",
     "@types/yargs": "^17.0.0",
     "dotenv": "^10.0.0",
+    "husky": "^6.0.0",
     "ts-node": "^8.10.2",
     "tslint": "~6.1.0",
     "typescript": "^4.0.7",
