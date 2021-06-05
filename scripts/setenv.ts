@@ -1,18 +1,17 @@
 const { writeFile } = require('fs');
 const { argv } = require('yargs');
 
-// read environment variables from .env file
+// Récupération de la configuration dans le .env
 require('dotenv').config();
 
-// read the command line arguments passed with yargs
+// Récupération du fichier de configuration 
 const environment = argv.environment;
 const isProduction = environment === 'prod';
 const targetPath = isProduction
    ? `./src/environments/environment.prod.ts`
    : `./src/environments/environment.ts`;
    
-// we have access to our environment variables
-// in the process.env object thanks to dotenv
+// Construction du nouveau contenu
 const environmentFileContent = `
 export const environment = {
    production: ${isProduction},
@@ -22,11 +21,12 @@ export const environment = {
    COINBASE_API_VERSION: "${process.env.COINBASE_API_VERSION}",
 };
 `;
-// write the content to the respective file
+
+// Écriture dans le fichier
 writeFile(targetPath, environmentFileContent, function (err) {
    if (err) {
       console.log(err);
    }
-   console.log(`Wrote variables to ${targetPath}`);
+   console.log(`Mise en place des paramètres dans le fichier : ${targetPath}`);
 });
 
