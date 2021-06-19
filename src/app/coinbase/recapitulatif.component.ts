@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { CoinbaseService } from './coinbase.service';
+import { Crypto } from '../interfaces/daocrypto.interface';
+import { CoinbaseConnexionService } from './coinbaseconnexion.service';
 
 @Component({
   selector: 'app-recapitulatif',
@@ -11,14 +11,22 @@ import { CoinbaseService } from './coinbase.service';
 })
 export class RecapitulatifComponent implements OnInit {
 
-  constructor(private coinBaseService: CoinbaseService, private http: HttpClient) { }
+  private donneesUtilisateur: any; 
+  private userId: string;
+  private monnaieUtilisateur: string;
+  private listeCryptos: Crypto[];
 
-  ngOnInit(): void {
+  constructor(private coinbaseService: CoinbaseService) { }
 
-    console.log("-->TEST")
+  async ngOnInit(): Promise<void> {
 
-    CoinbaseService.requete('GET', '/user', '', this.http).subscribe(result => console.log(result))
+    this.donneesUtilisateur = await this.coinbaseService.recupererLesDoneesUtilisateur();
+    this.userId = this.donneesUtilisateur.data.id;
+    this.monnaieUtilisateur = this.donneesUtilisateur.data.native_currency;
+    this.listeCryptos = await this.coinbaseService.recupererToutesLesCryptoAcquises(this.monnaieUtilisateur);
+
+    console.log("listeCryptos : ", this.listeCryptos)
     
-  }
 
+  }
 }
