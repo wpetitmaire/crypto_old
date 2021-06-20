@@ -2,11 +2,12 @@ import { Observable } from "rxjs";
 
 
 export interface Crypto {
-    id: string,
-    nom: string,
-    code: string,
-    quantite: number
-    prix_unitaire: number,
+    id: string, // Identifiant de la crypto
+    nom: string, // Nom de la crypto
+    code: string, // Code de la crypto
+    quantite: number // Quantité de crypto dans la portefeuille
+    prix: number, // Prix du portefeuille
+    prix_unitaire: number, // Prix unitaire de la crypto
     historique_cours_semaine: historiqueCrypto[],
     historique_des_mouvements: transactionCrypto[],
     etat: EtatCrypto

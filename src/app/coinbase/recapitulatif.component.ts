@@ -14,7 +14,8 @@ export class RecapitulatifComponent implements OnInit {
   private donneesUtilisateur: any; 
   private userId: string;
   private monnaieUtilisateur: string;
-  private listeCryptos: Crypto[];
+  listeCryptos: Crypto[];
+  listeEntetes = ["Crypto", "Prix unitaire", "Quantité", "Prix", "Cours semaine", "Montant"];
 
   constructor(private coinbaseService: CoinbaseService) { }
 
@@ -24,6 +25,8 @@ export class RecapitulatifComponent implements OnInit {
     this.userId = this.donneesUtilisateur.data.id;
     this.monnaieUtilisateur = this.donneesUtilisateur.data.native_currency;
     this.listeCryptos = await this.coinbaseService.recupererToutesLesCryptoAcquises(this.monnaieUtilisateur);
+
+
 
     console.log("listeCryptos : ", this.listeCryptos)
     

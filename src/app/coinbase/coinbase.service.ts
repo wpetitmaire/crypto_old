@@ -215,7 +215,7 @@ export class CoinbaseService implements CryptoDAO {
       .filter((ressource: any) => parseFloat(ressource.balance.amount) > 0)
       .forEach(async (ressource: any) => {
 
-        console.log(`--> RESSOURCE ${ressource.currency.code} : `, ressource)
+        // console.log(`--> RESSOURCE ${ressource.currency.code} : `, ressource)
 
         const basePaire = ressource.currency.code;
         const paire = `${basePaire}-${monnaieUtilisateur}`;
@@ -232,6 +232,7 @@ export class CoinbaseService implements CryptoDAO {
           nom: ressource.name,
           code: ressource.currency,
           quantite: ressource.balance.amount,
+          prix: prixDuPortefeuille,
           prix_unitaire: prixDeLaPaire,
           historique_cours_semaine: historiqueSemainePassee,
           historique_des_mouvements: listeDesTransactions,
