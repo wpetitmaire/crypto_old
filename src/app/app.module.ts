@@ -12,18 +12,21 @@ import { HttpModule } from '@angular/http';
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { KpiComponent } from './kpi/kpi.component';
 registerLocaleData(localeFr);
 @NgModule({
   declarations: [
     AppComponent,
-    RecapitulatifComponent
+    RecapitulatifComponent,
+    LineChartComponent,
+    KpiComponent,
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpModule,
     HttpClientModule
   ],
   providers: [

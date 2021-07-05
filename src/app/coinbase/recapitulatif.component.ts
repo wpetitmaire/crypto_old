@@ -11,11 +11,12 @@ import { CoinbaseConnexionService } from './coinbaseconnexion.service';
 })
 export class RecapitulatifComponent implements OnInit {
 
+  
+
   private donneesUtilisateur: any; 
   private userId: string;
   private monnaieUtilisateur: string;
   listeCryptos: Crypto[];
-  listeEntetes = ["Crypto", "Prix unitaire", "Quantité", "Prix", "Cours semaine", "Montant"];
 
   constructor(private coinbaseService: CoinbaseService) { }
 

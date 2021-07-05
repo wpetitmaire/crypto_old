@@ -172,10 +172,12 @@ export class CoinbaseService implements CryptoDAO {
     return liste;
   }
 
-  async recupererHistoriqueSemainePassee(paire: string): Promise<historiqueCrypto[]> {
+  async recupererHistoriqueSemainePassee(paire: string): Promise<historiqueCrypto> {
 
     const today = moment();
-    let liste: historiqueCrypto[] = []
+    let liste: historiqueCrypto;
+    let listeDate: string[] = [];
+    let listePrix: number[] = [];
 
     for (let ind = 1; ind <= 7; ind++) {
       
@@ -183,7 +185,14 @@ export class CoinbaseService implements CryptoDAO {
       let dateConcerneeStr = dateConcernee.format('YYYY[-]MM[-]DD');
 
       let resultat: any = await CoinbaseConnexionService.requete('GET', `/v2/prices/${paire}/spot?date=${dateConcerneeStr}`, '', this.http);   
-      liste.push({ date: dateConcernee, prix: parseFloat(resultat.data.amount) });
+      // liste.push({ date: dateConcernee, prix: parseFloat(resultat.data.amount) });
+      listeDate.push(dateConcerneeStr);
+      listePrix.push(parseFloat(resultat.data.amount));
+    }
+
+    liste = {
+      dates: listeDate,
+      prix: listePrix
     }
 
     return liste;

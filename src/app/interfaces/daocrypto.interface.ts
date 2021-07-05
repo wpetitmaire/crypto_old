@@ -8,14 +8,14 @@ export interface Crypto {
     quantite: number // Quantité de crypto dans la portefeuille
     prix: number, // Prix du portefeuille
     prix_unitaire: number, // Prix unitaire de la crypto
-    historique_cours_semaine: historiqueCrypto[],
+    historique_cours_semaine: historiqueCrypto,
     historique_des_mouvements: transactionCrypto[],
     etat: EtatCrypto
 }
 
 export interface historiqueCrypto {
-    date: moment.Moment,
-    prix: number
+    dates: string[],
+    prix: number[]
 }
 
 enum typeTransaction { 
@@ -98,7 +98,7 @@ export interface CryptoDAO {
     recupererLaListeDesPortefeuilles(): Promise<any>
     recupererLesDoneesUnPortefeuille(id: string): Promise<any>
     recupererLePrixDeLaPaire(base: string, monnaie: string): Promise<any>
-    recupererHistoriqueSemainePassee(paire: string): Promise<historiqueCrypto[]>
+    recupererHistoriqueSemainePassee(paire: string): Promise<historiqueCrypto>
     recupererLesTransactions(idRessource: string, typeDeTransaction: InputTypeTransaction): Promise<transactionCrypto[]>
     etablirLaSante(idRessource: string, montantActuel: number): Promise<EtatCrypto>
 }

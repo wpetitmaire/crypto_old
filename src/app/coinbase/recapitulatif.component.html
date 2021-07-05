@@ -1,8 +1,8 @@
 <h2>Coinbase</h2>
-<!-- <div class="container">
-</div> -->
 
-<table mdbTable hover="true" *ngIf="listeCryptos">
+<app-kpi></app-kpi>
+
+<table mdbTable hover="true" responsive="true" *ngIf="listeCryptos">
     <thead>
         <tr>
             <th [mdbTableSort]="listeCryptos" sortBy="code.code">ID</th>
@@ -19,8 +19,20 @@
             <td>{{ crypto.prix_unitaire.data.amount | currency:'EUR':'symbol':'1.2-2' }}</td>
             <td>{{ crypto.quantite | number: '.2-8' }}</td>
             <td>{{ crypto.prix | currency:'EUR':'symbol':'1.2-2'  }}</td>
-            <td>[COURS]</td>
-            <td>{{ crypto.etat.sante | currency:'EUR':'symbol':'1.2-2'  }}</td>
+            <td >
+
+                <app-line-chart
+                    [values]="crypto.historique_cours_semaine.prix"
+                    [labels]="crypto.historique_cours_semaine.dates"
+                    [borderColor]="'rgb(61, 90, 254)'"
+                    [backgroundColor]="'rgb(232, 234, 246)'"
+                ></app-line-chart>
+
+            </td>
+            <td>
+                <span *ngIf="crypto.etat.sante < 0" class="deep-orange-text font-weight-bold" >{{ crypto.etat.sante | currency:'EUR':'symbol':'1.2-2'  }}</span>
+                <span *ngIf="crypto.etat.sante >= 0" class="teal-text font-weight-bold" >{{ crypto.etat.sante | currency:'EUR':'symbol':'1.2-2'  }}</span> 
+            </td>
         </tr>
     </tbody>
 </table>
