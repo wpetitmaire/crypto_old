@@ -85,14 +85,21 @@ export interface VenteCrypto {
 }
 
 export interface EtatCrypto {
-    montantTotalAchete: number,
-    montantTotalVendu: number,
+    totalAchete: number,
+    totalVendu: number,
+    totalFrais: number,
+    totalDepense: number,
     sante: number,
     enBenefice: boolean,
 }
 
+export interface EtatPortefeuilleGlobal {
+    cryptos: Crypto[],
+    etat: EtatCrypto
+}
+
 export interface CryptoDAO {
-    recupererToutesLesCryptoAcquises(monnaieUtilisateur: string): Promise<Crypto[]>
+    recupererEtatPortefeuille(monnaieUtilisateur: string): Promise<EtatPortefeuilleGlobal>
 
     recupererLesDoneesUtilisateur(): Promise<any>
     recupererLaListeDesPortefeuilles(): Promise<any>
@@ -100,5 +107,5 @@ export interface CryptoDAO {
     recupererLePrixDeLaPaire(base: string, monnaie: string): Promise<any>
     recupererHistoriqueSemainePassee(paire: string): Promise<historiqueCrypto>
     recupererLesTransactions(idRessource: string, typeDeTransaction: InputTypeTransaction): Promise<transactionCrypto[]>
-    etablirLaSante(idRessource: string, montantActuel: number): Promise<EtatCrypto>
+    etablirLaSantePourUneCrypto(idRessource: string, montantActuel: number): Promise<EtatCrypto>
 }

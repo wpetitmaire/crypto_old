@@ -1,6 +1,25 @@
 <h2>Coinbase</h2>
 
-<app-kpi></app-kpi>
+<!-- <app-kpi *ngIf="etatGlobal"  [valeur]="etatGlobal.etat.totalAchete" [titre]="'Acheté'" [type]="'currency'" [neutre]="true" ></app-kpi> -->
+
+<div class="">
+    <div class="row g-0">
+        <div class="col-4">
+            <div class="p-1"><app-kpi *ngIf="etatGlobal"  [valeur]="etatGlobal.etat.totalAchete" [titre]="'Acheté'" [type]="'currency'" [neutre]="true" ></app-kpi></div>
+        </div>
+        <div class="col-4">
+            <div class="p-1"><app-kpi *ngIf="etatGlobal"  [valeur]="etatGlobal.etat.totalFrais" [titre]="'Frais'" [type]="'currency'" [neutre]="true" ></app-kpi></div>
+        </div>
+        <div class="col-4">
+            <div class="p-1"><app-kpi *ngIf="etatGlobal"  [valeur]="etatGlobal.etat.totalDepense" [titre]="'Dépensé'" [type]="'currency'" [neutre]="true" ></app-kpi></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="p-1"><app-kpi *ngIf="etatGlobal"  [valeur]="etatGlobal.etat.sante" [titre]="'État'" [type]="'currency'"  ></app-kpi></div>
+        </div>
+    </div>
+  </div>
 
 <table mdbTable hover="true" responsive="true" *ngIf="listeCryptos">
     <thead>

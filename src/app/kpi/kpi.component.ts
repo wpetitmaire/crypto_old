@@ -12,11 +12,12 @@ export class KpiComponent implements OnInit {
   @Input() titre: string;
   @Input() valeur: number;
   @Input() type:  "date" | "number" | "string" | "currency";
+  @Input() neutre: boolean = false
 
   constructor() {
-    this.titre = "Acheté";
-    this.valeur = 1200 
-    this.type = "currency";
+    // this.titre = "Acheté";
+    // this.valeur = 1200 
+    // this.type = "currency";
   }
 
   ngOnInit(): void {

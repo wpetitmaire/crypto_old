@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoinbaseService } from './coinbase.service';
-import { Crypto } from '../interfaces/daocrypto.interface';
+import { Crypto, EtatCrypto, EtatPortefeuilleGlobal } from '../interfaces/daocrypto.interface';
 import { CoinbaseConnexionService } from './coinbaseconnexion.service';
 
 @Component({
@@ -17,6 +17,7 @@ export class RecapitulatifComponent implements OnInit {
   private userId: string;
   private monnaieUtilisateur: string;
   listeCryptos: Crypto[];
+  etatGlobal: EtatPortefeuilleGlobal;
 
   constructor(private coinbaseService: CoinbaseService) { }
 
@@ -25,11 +26,11 @@ export class RecapitulatifComponent implements OnInit {
     this.donneesUtilisateur = await this.coinbaseService.recupererLesDoneesUtilisateur();
     this.userId = this.donneesUtilisateur.data.id;
     this.monnaieUtilisateur = this.donneesUtilisateur.data.native_currency;
-    this.listeCryptos = await this.coinbaseService.recupererToutesLesCryptoAcquises(this.monnaieUtilisateur);
+    this.etatGlobal = await this.coinbaseService.recupererEtatPortefeuille(this.monnaieUtilisateur);
+    this.listeCryptos = this.etatGlobal.cryptos;
 
 
-
-    console.log("listeCryptos : ", this.listeCryptos)
+    console.log("etatGlobal : ", this.etatGlobal)
     
 
   }
