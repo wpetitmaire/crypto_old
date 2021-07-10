@@ -237,6 +237,7 @@ export class CoinbaseService implements CryptoDAO {
     let globalDepense = 0;
     let globalsante = 0;
     let etatbenefice = false;
+    let sommePrixPortefeuille = 0;
 
     let listeDesRessources = Array.from(donneesDesPortefeuilles.data)
       .filter((ressource: any) => parseFloat(ressource.balance.amount) > 0);
@@ -275,6 +276,7 @@ export class CoinbaseService implements CryptoDAO {
         globalDepense += santePortefeuille.totalDepense;
         globalsante += santePortefeuille.sante;
         etatbenefice = globalsante >= 0
+        sommePrixPortefeuille += prixDuPortefeuille;
     }))
 
     return {
@@ -286,7 +288,8 @@ export class CoinbaseService implements CryptoDAO {
         totalDepense: globalDepense,
         sante: globalsante,
         enBenefice: globalsante >= 0
-      }
+      },
+      sommePrix: sommePrixPortefeuille
     };
   }
 }

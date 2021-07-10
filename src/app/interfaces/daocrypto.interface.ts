@@ -95,7 +95,8 @@ export interface EtatCrypto {
 
 export interface EtatPortefeuilleGlobal {
     cryptos: Crypto[],
-    etat: EtatCrypto
+    etat: EtatCrypto,
+    sommePrix: Number
 }
 
 export interface CryptoDAO {
