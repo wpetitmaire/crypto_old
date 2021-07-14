@@ -69,9 +69,9 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log("--> INIT");
-    console.log(this.labels)
-    console.log(this.values)
-    console.log(this.listeCouleurs)
+    // console.log("--> INIT");
+    // console.log(this.labels)
+    // console.log(this.values)
+    // console.log(this.listeCouleurs)
   }
 }

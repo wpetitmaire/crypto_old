@@ -16,7 +16,7 @@
         <div class="p-1"><app-kpi *ngIf="etatGlobal"  [valeur]="etatGlobal.etat.sante" [titre]="'Santé'" [type]="'currency'"  ></app-kpi></div>
     </div>
     <div class="col-6">
-        <div class="p-1"><app-kpi *ngIf="etatGlobal"  [valeur]="etatGlobal.sommePrix" [titre]="'Etat'" [type]="'currency'" [neutre]="true" ></app-kpi></div>
+        <div class="p-1"><app-kpi *ngIf="etatGlobal"  [valeur]="etatGlobal.etat.totalPrix" [titre]="'Etat'" [type]="'currency'" [neutre]="true" ></app-kpi></div>
     </div>
 </div>
 

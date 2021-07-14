@@ -10,7 +10,9 @@ export interface Crypto {
     prix_unitaire: number, // Prix unitaire de la crypto
     historique_cours_semaine: historiqueCrypto,
     historique_des_mouvements: transactionCrypto[],
-    etat: EtatCrypto
+    etat: EtatPortefeuille
+    etatDateVariation?: EtatPortefeuille
+    variation?: { pourcentage: number, valeur: number }
 }
 
 export interface historiqueCrypto {
@@ -84,23 +86,36 @@ export interface VenteCrypto {
     urlRessource: string
 }
 
-export interface EtatCrypto {
+export interface EtatPortefeuille {
     totalAchete: number,
     totalVendu: number,
     totalFrais: number,
     totalDepense: number,
+    totalPrix?: number
     sante: number,
     enBenefice: boolean,
 }
 
 export interface EtatPortefeuilleGlobal {
     cryptos: Crypto[],
-    etat: EtatCrypto,
-    sommePrix: Number
+    etat: EtatPortefeuille,
+    etatDateVariation?: EtatPortefeuille,
+    variation?: {
+        sante: {
+            pourcentage: number,
+            valeur: number
+        },
+        etat: {
+            pourcentage: number,
+            valeur: number
+        }
+    }
 }
+
 
 export interface CryptoDAO {
     recupererEtatPortefeuille(monnaieUtilisateur: string): Promise<EtatPortefeuilleGlobal>
+    recupererEtatPortefeuilleSurDatePrecise(monnaieUtilisateur: string, date: moment.Moment): Promise<any>
 
     recupererLesDoneesUtilisateur(): Promise<any>
     recupererLaListeDesPortefeuilles(): Promise<any>
@@ -108,5 +123,5 @@ export interface CryptoDAO {
     recupererLePrixDeLaPaire(base: string, monnaie: string): Promise<any>
     recupererHistoriqueSemainePassee(paire: string): Promise<historiqueCrypto>
     recupererLesTransactions(idRessource: string, typeDeTransaction: InputTypeTransaction): Promise<transactionCrypto[]>
-    etablirLaSantePourUneCrypto(idRessource: string, montantActuel: number): Promise<EtatCrypto>
+    etablirLaSantePourUneCrypto(idRessource: string, montantActuel: number): Promise<EtatPortefeuille>
 }

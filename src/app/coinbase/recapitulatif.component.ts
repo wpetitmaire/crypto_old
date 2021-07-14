@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CoinbaseService } from './coinbase.service';
-import { Crypto, EtatCrypto, EtatPortefeuilleGlobal } from '../interfaces/daocrypto.interface';
+import { Crypto, EtatPortefeuille, EtatPortefeuilleGlobal } from '../interfaces/daocrypto.interface';
 import { CoinbaseConnexionService } from './coinbaseconnexion.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-recapitulatif',
@@ -29,9 +30,7 @@ export class RecapitulatifComponent implements OnInit {
     this.etatGlobal = await this.coinbaseService.recupererEtatPortefeuille(this.monnaieUtilisateur);
     this.listeCryptos = this.etatGlobal.cryptos;
 
-
-    console.log("etatGlobal : ", this.etatGlobal)
-    
+    console.log("état du jour : ", this.etatGlobal)
 
   }
 }
