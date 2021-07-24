@@ -15,9 +15,7 @@ export class KpiComponent implements OnInit {
   @Input() neutre: boolean = false
 
   constructor() {
-    // this.titre = "Acheté";
-    // this.valeur = 1200 
-    // this.type = "currency";
+
   }
 
   ngOnInit(): void {

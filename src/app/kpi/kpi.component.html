@@ -3,10 +3,15 @@
     style="background-color: rgba(0, 0, 255, 0.1)"
 >
     <div class="py-0"><strong><span>{{ titre }}</span></strong></div>
-    <div  class="d-flex align-items-center py-0" style="height: 100%;" [ngClass]="{'deep-orange-text': valeur < 0, 'teal-text': valeur >= 0, 'black-text': neutre}">
-        <span *ngIf="type=='currency'" >{{ valeur | currency:'EUR':'symbol':'1.2-2' }}</span>
-        <span *ngIf="type=='date'" >{{ valeur  }}</span>
-        <span *ngIf="type=='number'" >{{ valeur | number: '.2-8' }}</span>
-        <span *ngIf="type=='string'" >{{ valeur  }}</span>
+    <div  class="d-flex align-items-center py-0" style="height: 100%;" >
+        <div [ngClass]="{'deep-orange-text': valeur < 0, 'teal-text': valeur >= 0, 'black-text': neutre}">
+            <span *ngIf="type=='currency'" >{{ valeur | currency:'EUR':'symbol':'1.2-2' }}</span>
+            <span *ngIf="type=='date'" >{{ valeur  }}</span>
+            <span *ngIf="type=='number'" >{{ valeur | number: '.2-8' }}</span>
+            <span *ngIf="type=='string'" >{{ valeur  }}</span>
+        </div>
+        <div>
+            <span>ICI</span>
+        </div>
     </div>
 </div>
