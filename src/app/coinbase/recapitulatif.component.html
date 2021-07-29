@@ -39,8 +39,9 @@
                 [valeur]="etatGlobal.etat.sante" 
                 [titre]="'Santé'" 
                 [type]="'currency'"
-                [variationPourcentage]="etatGlobal.variation.etat.pourcentage"
-                [variationValeur]="etatGlobal.variation.etat.valeur"
+                [variationPourcentage]="etatGlobal.variation.sante.pourcentage"
+                [variationValeur]="etatGlobal.variation.sante.valeur"
+                [typeVariation]="'pourcentage'"
                 >
             </app-kpi>
         </div>
@@ -51,7 +52,11 @@
                 [valeur]="etatGlobal.etat.totalPrix" 
                 [titre]="'Etat'" 
                 [type]="'currency'" 
-                [neutre]="true" >
+                [neutre]="true" 
+                [variationPourcentage]="etatGlobal.variation.etat.pourcentage"
+                [variationValeur]="etatGlobal.variation.etat.valeur"
+                [typeVariation]="'pourcentage'"
+                >
             </app-kpi>
         </div>
     </div>

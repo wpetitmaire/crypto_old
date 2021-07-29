@@ -13,6 +13,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { KpiComponent } from './kpi/kpi.component';
+import {MatIconModule} from '@angular/material/icon';
 registerLocaleData(localeFr);
 @NgModule({
   declarations: [
@@ -20,8 +21,10 @@ registerLocaleData(localeFr);
     RecapitulatifComponent,
     LineChartComponent,
     KpiComponent,
+    
   ],
   imports: [
+    MatIconModule,
     MDBBootstrapModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
