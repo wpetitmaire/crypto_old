@@ -21,11 +21,7 @@ export class KpiComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-
-    console.log(`titre:${this.titre}`, `valeur:${this.valeur}`, `type:${this.type}`, `neutre:${this.neutre}`, `variationPourcentage:${this.variationPourcentage}`, `variationValeur:${this.variationValeur}`, `typeVariation:${this.typeVariation}`)
-    console.log('Variation negative : ', this.variationNegative())
-  }
+  ngOnInit(): void {}
 
   variationNegative(): boolean {
     if(this.typeVariation == 'pourcentage' && this.variationPourcentage < 0)

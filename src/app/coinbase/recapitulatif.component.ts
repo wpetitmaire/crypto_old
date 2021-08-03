@@ -7,8 +7,7 @@ import moment from 'moment';
 @Component({
   selector: 'app-recapitulatif',
   templateUrl: './recapitulatif.component.html',
-  styles: [
-  ]
+  styleUrls: ['./recapitulatif.component.scss']
 })
 export class RecapitulatifComponent implements OnInit {
 

@@ -8,11 +8,13 @@ export interface Crypto {
     quantite: number // Quantité de crypto dans la portefeuille
     prix: number, // Prix du portefeuille
     prix_unitaire: number, // Prix unitaire de la crypto
+    prix_unitaire_date_variation: number, // Prix unitaire de la crypto à la date de variation
     historique_cours_semaine: historiqueCrypto,
     historique_des_mouvements: transactionCrypto[],
     etat: EtatPortefeuille
     etatDateVariation?: EtatPortefeuille
     variation?: { pourcentage: number, valeur: number }
+    variation_prix?: { pourcentage: number, valeur: number }
 }
 
 export interface historiqueCrypto {

@@ -62,36 +62,54 @@
     </div>
 </div>
 
-<table mdbTable hover="true" responsive="true" *ngIf="listeCryptos">
+<table mdbTable hover="true" responsive="true" *ngIf="listeCryptos" class="w-auto">
     <thead>
         <tr>
             <th [mdbTableSort]="listeCryptos" sortBy="code.code">ID</th>
             <th [mdbTableSort]="listeCryptos" sortBy="prix_unitaire.data.amount">Prix unitaire</th>
             <th [mdbTableSort]="listeCryptos" sortBy="quantite">Quantité</th>
             <th [mdbTableSort]="listeCryptos" sortBy="prix">Prix</th>
-            <th >Cours semaine</th>
-            <th [mdbTableSort]="listeCryptos" sortBy="etat.sante">Montant</th>
+            <th >Semaine</th>
+            <th [mdbTableSort]="listeCryptos" sortBy="etat.sante">Santé</th>
         </tr>
     </thead>
     <tbody>
         <tr mdbTableCol *ngFor="let crypto of listeCryptos">
             <th scope="row">{{ crypto.code.code }}</th>
-            <td>{{ crypto.prix_unitaire.data.amount | currency:'EUR':'symbol':'1.2-2' }}</td>
+            <td>
+                <!-- {{ crypto.prix_unitaire.data.amount | currency:'EUR':'symbol':'1.2-2' }} -->
+                <div class="d-flex flex-column">
+                    <span>{{ crypto.prix_unitaire.data.amount | currency:'EUR':'symbol':'1.2-2' }}</span>
+                    <div class="d-flex recap-variation" [ngClass]="{ 'deep-orange-text':crypto.variation_prix.pourcentage < 0, 'teal-text':crypto.variation_prix.pourcentage >= 0 }">
+                        <i class="fas fa-caret-up icon" [ngClass]="{ 'fa-caret-up':crypto.variation_prix.pourcentage >= 0, 'fa-caret-down':crypto.variation_prix.pourcentage < 0 }"></i>
+                        <span>{{ crypto.variation_prix.pourcentage | number: '1.2-2' }}</span> <span>%</span>
+                    </div>
+                </div>
+            </td>
             <td>{{ crypto.quantite | number: '.2-8' }}</td>
             <td>{{ crypto.prix | currency:'EUR':'symbol':'1.2-2'  }}</td>
             <td >
 
-                <app-line-chart
-                    [values]="crypto.historique_cours_semaine.prix"
-                    [labels]="crypto.historique_cours_semaine.dates"
-                    [borderColor]="'rgb(61, 90, 254)'"
-                    [backgroundColor]="'rgb(232, 234, 246)'"
-                ></app-line-chart>
+                <div style="width: 80px; height: 30px;" >
+                
+                    <app-line-chart
+                        [values]="crypto.historique_cours_semaine.prix"
+                        [labels]="crypto.historique_cours_semaine.dates"
+                        [borderColor]="'rgb(61, 90, 254)'"
+                        [backgroundColor]="'rgb(232, 234, 246)'"
+                    ></app-line-chart>
+                </div>
+
 
             </td>
             <td>
-                <span *ngIf="crypto.etat.sante < 0" class="deep-orange-text font-weight-bold" >{{ crypto.etat.sante | currency:'EUR':'symbol':'1.2-2'  }}</span>
-                <span *ngIf="crypto.etat.sante >= 0" class="teal-text font-weight-bold" >{{ crypto.etat.sante | currency:'EUR':'symbol':'1.2-2'  }}</span> 
+                <div class="d-flex flex-column">
+                    <span [ngClass]="{ 'deep-orange-text':crypto.etat.sante < 0, 'teal-text':crypto.etat.sante >= 0 }" >{{ crypto.etat.sante | currency:'EUR':'symbol':'1.2-2'  }}</span>
+                    <div class="d-flex recap-variation" [ngClass]="{ 'deep-orange-text':crypto.variation.pourcentage < 0, 'teal-text':crypto.variation.pourcentage >= 0 }">
+                        <i class="fas fa-caret-up icon" [ngClass]="{ 'fa-caret-up':crypto.variation.pourcentage >= 0, 'fa-caret-down':crypto.variation.pourcentage < 0 }"></i>
+                        <span>{{ crypto.variation.pourcentage | number: '1.2-2' }}</span> <span>%</span>
+                    </div>
+                </div>
             </td>
         </tr>
     </tbody>

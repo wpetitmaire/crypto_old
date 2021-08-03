@@ -261,8 +261,6 @@ export class CoinbaseService implements CryptoDAO {
 
     await Promise.all(listeDesRessources.map(async (ressource:any) => {
 
-        // console.log(`--> RESSOURCE ${ressource.currency.code} : `, ressource);
-
         const basePaire = ressource.currency.code;
         const paire = `${basePaire}-${monnaieUtilisateur}`;
         const idRessource = ressource.id;
@@ -276,9 +274,6 @@ export class CoinbaseService implements CryptoDAO {
         const santePortefeuille = await this.etablirLaSantePourUneCrypto(idRessource, prixDuPortefeuille);
         const santePortefeuilleDateVariation = await this.etablirLaSantePourUneCrypto(idRessource, prixDuPortefeuilleDateVariation, datePourVariation);
 
-        // console.log(`--> Santé ${ressource.currency.code} : `, santePortefeuille);
-        // console.log(`--> Santé variation ${ressource.currency.code} : `, santePortefeuilleDateVariation);
-
         liste.push({
           id: idRessource,
           nom: ressource.name,
@@ -286,6 +281,7 @@ export class CoinbaseService implements CryptoDAO {
           quantite: ressource.balance.amount,
           prix: prixDuPortefeuille,
           prix_unitaire: prixDeLaPaire,
+          prix_unitaire_date_variation: prixDeLaPaireDateVariation,
           historique_cours_semaine: historiqueSemainePassee,
           historique_des_mouvements: listeDesTransactions,
           etat: santePortefeuille,
@@ -293,7 +289,11 @@ export class CoinbaseService implements CryptoDAO {
           variation: {
             pourcentage: ((Math.abs(santePortefeuille.sante) - Math.abs(santePortefeuilleDateVariation.sante)) / santePortefeuilleDateVariation.sante) * 100,
             valeur: santePortefeuille.sante - santePortefeuilleDateVariation.sante
-          }
+          },
+          variation_prix: {
+            pourcentage: ((Math.abs(prixDeLaPaire.data.amount) - Math.abs(prixDeLaPaireDateVariation.data.amount)) / prixDeLaPaireDateVariation.data.amount) * 100,
+            valeur: prixDeLaPaire.data.amount - prixDeLaPaireDateVariation.data.amount
+          },
         });
 
         globalAchete += santePortefeuille.totalAchete;
@@ -358,21 +358,13 @@ export class CoinbaseService implements CryptoDAO {
 
     await Promise.all(listeDesRessources.map(async (ressource:any) => {
 
-        // console.log(`--> RESSOURCE ${ressource.currency.code} : `, ressource);
-
-        // const dateHier = moment().subtract(1, 'days').format('YYYY[-]MM[-]DD');
-
         const basePaire = ressource.currency.code;
         const paire = `${basePaire}-${monnaieUtilisateur}`;
         const idRessource = ressource.id;
         const urlIdRessource = ressource.resource_path;
         const prixDeLaPaire = await this.recupererLePrixDeLaPaire(ressource.currency.code, monnaieUtilisateur, date);
         const prixDuPortefeuille = parseFloat(prixDeLaPaire.data.amount) * ressource.balance.amount;
-        // const historiqueSemainePassee = await this.recupererHistoriqueSemainePassee(paire);
-        // const listeDesTransactions = await this.recupererLesTransactions(idRessource);
         const santePortefeuille = await this.etablirLaSantePourUneCrypto(idRessource, prixDuPortefeuille, date);
-
-        // console.log(`--> Santé ${ressource.currency.code} : `, santePortefeuille);
 
         liste.push({
           id: idRessource,
@@ -381,8 +373,6 @@ export class CoinbaseService implements CryptoDAO {
           quantite: ressource.balance.amount,
           prix: prixDuPortefeuille,
           prix_unitaire: prixDeLaPaire,
-          // historique_cours_semaine: historiqueSemainePassee,
-          // historique_des_mouvements: listeDesTransactions,
           etat: santePortefeuille
         });
 
